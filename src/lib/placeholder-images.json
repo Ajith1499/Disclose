@@ -1,3 +1,118 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Stylish woman in a vibrant city street, looking at her phone.",
+      "imageUrl": "https://images.unsplash.com/photo-1541519481457-763224276691?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmYXNoaW9uJTIwbW9kZWx8ZW58MHx8fHwxNzU5NDcxMzY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fashion model"
+    },
+    {
+      "id": "product1",
+      "description": "A classic denim jacket.",
+      "imageUrl": "https://images.unsplash.com/photo-1614697688184-66a55d41e298?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkZW5pbSUyMGphY2tldHxlbnwwfHx8fDE3NTk0NzA5MDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "denim jacket"
+    },
+    {
+      "id": "product2",
+      "description": "A white summer dress with floral patterns.",
+      "imageUrl": "https://images.unsplash.com/photo-1532675432006-329c6fed7045?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdW1tZXIlMjBkcmVzc3xlbnwwfHx8fDE3NTk0ODc5MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "summer dress"
+    },
+    {
+      "id": "product3",
+      "description": "Black leather ankle boots.",
+      "imageUrl": "https://images.unsplash.com/photo-1602250523342-d2212b96a297?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxsZWF0aGVyJTIwYm9vdHN8ZW58MHx8fHwxNzU5NTU4MzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "leather boots"
+    },
+    {
+      "id": "product4",
+      "description": "A comfortable gray hoodie.",
+      "imageUrl": "https://images.unsplash.com/photo-1509300936132-65ad921bad41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxncmF5JTIwaG9vZGllfGVufDB8fHx8MTc1OTU0OTQ1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gray hoodie"
+    },
+    {
+      "id": "product5",
+      "description": "Slim-fit chino pants in khaki.",
+      "imageUrl": "https://images.unsplash.com/photo-1698919585873-8c6852de9b96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjaGlubyUyMHBhbnRzfGVufDB8fHx8MTc1OTUxODE1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chino pants"
+    },
+    {
+      "id": "product6",
+      "description": "A striped long-sleeve t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1621593666024-c53222fb5361?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzdHJpcGVkJTIwc2hpcnR8ZW58MHx8fHwxNzU5NDQ4MjA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "striped shirt"
+    },
+    {
+      "id": "product7",
+      "description": "A blue and white flannel shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1665037053639-d3b4c2ec6e4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxmbGFubmVsJTIwc2hpcnR8ZW58MHx8fHwxNzU5NDgzNzQ4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "flannel shirt"
+    },
+    {
+      "id": "product8",
+      "description": "A wool winter coat in charcoal.",
+      "imageUrl": "https://images.unsplash.com/photo-1425100599170-85ec4f00a6ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3aW50ZXIlMjBjb2F0fGVufDB8fHx8MTc1OTU2ODk2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "winter coat"
+    },
+    {
+      "id": "product9",
+      "description": "Women's high-waisted jeans.",
+      "imageUrl": "https://images.unsplash.com/photo-1685338336656-e10a7bb3e12a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx3b21lbiUyMGplYW5zfGVufDB8fHx8MTc1OTUwMjcxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "women jeans"
+    },
+    {
+      "id": "product10",
+      "description": "Men's graphic t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1655141559952-de52ac91617e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxncmFwaGljJTIwdC1zaGlydHxlbnwwfHx8fDE3NTk1NTUzMTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "graphic t-shirt"
+    },
+    {
+      "id": "product11",
+      "description": "A flowy midi skirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1649899240929-a19a0dcf02fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtaWRpJTIwc2tpcnR8ZW58MHx8fHwxNzU5NDgxODE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "midi skirt"
+    },
+    {
+      "id": "product12",
+      "description": "A tailored navy blue blazer.",
+      "imageUrl": "https://images.unsplash.com/photo-1646888000770-5fa873c69e6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxibHVlJTIwYmxhemVyfGVufDB8fHx8MTc1OTUxNjc4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "blue blazer"
+    },
+    {
+      "id": "shop1",
+      "description": "The exterior of a modern, chic boutique.",
+      "imageUrl": "https://images.unsplash.com/photo-1637498822643-6375fc42e4e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzdG9yZSUyMGV4dGVyaW9yfGVufDB8fHx8MTc1OTQ4NDMwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "store exterior"
+    },
+    {
+      "id": "shop2",
+      "description": "The interior of a rustic, vintage clothing store.",
+      "imageUrl": "https://images.unsplash.com/photo-1695817154398-6cd777a2f697?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dmludGFnZSUyMHN0b3JlfGVufDB8fHx8MTc1OTU2ODk2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "vintage store"
+    },
+    {
+      "id": "shop3",
+      "description": "A bright and airy storefront with large windows.",
+      "imageUrl": "https://images.unsplash.com/photo-1568645527914-d1d3edd2ee18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzaG9wJTIwZnJvbnR8ZW58MHx8fHwxNzU5NTY4OTYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "shop front"
+    },
+    {
+      "id": "shop4",
+      "description": "A minimalist clothing store with organized racks.",
+      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbG90aGluZyUyMHN0b3JlfGVufDB8fHx8MTc1OTUxODE5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "clothing store"
+    },
+    {
+      "id": "shop5",
+      "description": "An upscale fashion boutique with luxury items.",
+      "imageUrl": "https://images.unsplash.com/photo-1570857502809-08184874388e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwYm91dGlxdWV8ZW58MHx8fHwxNzU5NDk3ODQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fashion boutique"
+    },
+    {
+      "id": "avatar1",
+      "description": "Portrait of a smiling young woman.",
+      "imageUrl": "https://images.unsplash.com/photo-1592621385612-4d7129426394?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc1OTUyMDY3NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman portrait"
+    }
+  ]
 }
