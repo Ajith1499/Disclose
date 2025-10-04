@@ -50,9 +50,6 @@ const prompt = ai.definePrompt({
   Age Range: {{{ageRange}}}
 
   Browsing History: {{{browsingHistory}}}
-
-  Provide the recommendations in the following JSON format:
-  {{$instructions PersonalizedRecommendationsOutputSchema}}
   `,
 });
 
