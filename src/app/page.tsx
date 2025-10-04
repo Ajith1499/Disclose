@@ -1,23 +1,34 @@
+'use client';
 import Image from 'next/image';
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { products, shops } from '@/lib/data';
 import ProductCard from '@/components/product-card';
 import ShopCard from '@/components/shop-card';
 import RecommendedForYou from '@/components/home/recommended-for-you';
 import { placeholderImages } from '@/lib/placeholder-images.json';
 import Link from 'next/link';
+import { useCollection, useFirebase, useMemoFirebase } from '@/firebase';
+import { collection, limit, query } from 'firebase/firestore';
 
 export default function Home() {
   const heroImage = placeholderImages.find(p => p.id === "hero");
-  const trendingProducts = products.slice(0, 4);
-  const nearbyShops = shops.slice(0, 3);
+  
+  const { firestore } = useFirebase();
+
+  const productsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'products'), limit(4));
+  }, [firestore]);
+  const { data: trendingProducts } = useCollection(productsQuery);
+
+  const shopsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'shops'), limit(3));
+  }, [firestore]);
+  const { data: nearbyShops } = useCollection(shopsQuery);
 
   return (
     <div className="space-y-12">
@@ -59,7 +70,7 @@ export default function Home() {
         <h2 className="font-headline text-3xl font-bold">Trending Now</h2>
         <p className="text-muted-foreground">See what's popular in your area.</p>
         <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {trendingProducts.map((product) => (
+          {trendingProducts?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -69,7 +80,7 @@ export default function Home() {
         <h2 className="font-headline text-3xl font-bold">Nearby Shops</h2>
          <p className="text-muted-foreground">Explore boutiques and stores just around the corner.</p>
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {nearbyShops.map((shop) => (
+          {nearbyShops?.map((shop) => (
             <ShopCard key={shop.id} shop={shop} />
           ))}
         </div>

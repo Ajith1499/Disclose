@@ -1,11 +1,32 @@
+'use client';
 import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { products } from "@/lib/data";
+import { useCollection, useFirebase, useMemoFirebase, useUser } from "@/firebase";
+import { collection, query, where } from "firebase/firestore";
 import { PlusCircle } from "lucide-react";
 
 export default function WishlistPage() {
-  const wishlistedProducts = products.slice(4, 8);
+  const { firestore } = useFirebase();
+  const { user } = useUser();
+
+  const wishlistQuery = useMemoFirebase(() => {
+    if (!firestore || !user) return null;
+    // Assuming a single wishlist per user for now
+    return query(collection(firestore, 'users', user.uid, 'wishlists'));
+  }, [firestore, user]);
+
+  const { data: wishlists } = useCollection(wishlistQuery);
+  const wishlist = wishlists?.[0];
+
+  // Fetch products that are in the wishlist
+  const productsQuery = useMemoFirebase(() => {
+    if (!firestore || !wishlist || wishlist.productIds.length === 0) return null;
+    return query(collection(firestore, 'products'), where('id', 'in', wishlist.productIds));
+  }, [firestore, wishlist]);
+
+  const { data: wishlistedProducts } = useCollection(productsQuery);
+
 
   return (
     <div className="space-y-8">
@@ -32,7 +53,7 @@ export default function WishlistPage() {
         </div>
       </div>
       
-      {wishlistedProducts.length > 0 ? (
+      {wishlistedProducts && wishlistedProducts.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {wishlistedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />

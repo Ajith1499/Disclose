@@ -25,7 +25,7 @@ export type User = {
 
 export type Transaction = {
   id: string;
-  type: 'Credit' | 'Debit';
+  type: 'cashback' | 'return' | 'exchange' | 'debit';
   amount: number;
   date: string;
   description: string;
@@ -59,19 +59,4 @@ export const users: User[] = [
   { id: 'u1', name: 'Alice Johnson', avatarId: 'avatar1' },
 ];
 
-export const transactions: Transaction[] = [
-    { id: 't1', type: 'Credit', amount: 50.00, date: '2024-07-20', description: 'Cashback offer from Urban Appeal' },
-    { id: 't2', type: 'Credit', amount: 89.99, date: '2024-07-18', description: 'Return approved for Classic Denim Jacket' },
-    { id: 't3', type: 'Debit', amount: 30.00, date: '2024-07-15', description: 'Purchase of Graphic T-Shirt' },
-    { id: 't4', type: 'Credit', amount: 10.00, date: '2024-07-12', description: 'Exchange balance from Style & Substance' },
-    { id: 't5', type: 'Debit', amount: 120.00, date: '2024-07-10', description: 'Purchase of Leather Ankle Boots' },
-];
-
-export const getProductsByShop = (shopId: string) => products.filter(p => p.shopId === shopId);
-
-export const getProductsByShopAndCategory = (shopId: string, category: string) => 
-  products.filter(p => p.shopId === shopId && p.category === category);
-
-export const findProductById = (id: string) => products.find(p => p.id === id);
-export const findShopById = (id: string) => shops.find(s => s.id === id);
 export const findImageById = (id: string) => placeholderImages.find(i => i.id === id);

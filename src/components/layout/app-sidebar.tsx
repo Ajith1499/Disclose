@@ -18,12 +18,13 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { findImageById, users } from '@/lib/data';
+import { findImageById } from '@/lib/data';
 import NavLink from './nav-link';
+import { useUser } from '@/firebase';
 
 export default function AppSidebar() {
-  const user = users[0];
-  const avatar = findImageById(user.avatarId);
+  const { user } = useUser();
+  const avatar = user ? findImageById('avatar1') : null;
 
   return (
     <div className="hidden border-r bg-card md:flex md:flex-col md:w-64">
@@ -66,11 +67,11 @@ export default function AppSidebar() {
           <Card>
             <CardHeader className="flex flex-row items-center gap-4 p-4">
                <Avatar className="h-10 w-10 border">
-                {avatar && <AvatarImage src={avatar.imageUrl} alt={user.name} data-ai-hint={avatar.imageHint} />}
-                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                {avatar && user && <AvatarImage src={avatar.imageUrl} alt={user.displayName || 'User'} data-ai-hint={avatar.imageHint} />}
+                <AvatarFallback>{user?.displayName?.charAt(0) || 'U'}</AvatarFallback>
               </Avatar>
               <div className='w-full overflow-hidden'>
-                <CardTitle className="text-base truncate">{user.name}</CardTitle>
+                <CardTitle className="text-base truncate">{user?.displayName || 'Anonymous User'}</CardTitle>
                 <CardDescription className="text-xs">Premium Member</CardDescription>
               </div>
             </CardHeader>

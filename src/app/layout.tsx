@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import AppSidebar from '@/components/layout/app-sidebar';
 import AppHeader from '@/components/layout/app-header';
+import { FirebaseClientProvider } from '@/firebase';
 
 export const metadata: Metadata = {
   title: 'LocalThreads',
@@ -27,16 +28,18 @@ export default function RootLayout({
           'min-h-screen w-full bg-background font-body text-foreground antialiased'
         )}
       >
-        <div className="flex min-h-screen w-full">
-          <AppSidebar />
-          <div className="flex flex-1 flex-col">
-            <AppHeader />
-            <main className="flex-1 overflow-y-auto p-4 md:p-8">
-              {children}
-            </main>
+        <FirebaseClientProvider>
+          <div className="flex min-h-screen w-full">
+            <AppSidebar />
+            <div className="flex flex-1 flex-col">
+              <AppHeader />
+              <main className="flex-1 overflow-y-auto p-4 md:p-8">
+                {children}
+              </main>
+            </div>
           </div>
-        </div>
-        <Toaster />
+          <Toaster />
+        </FirebaseClientProvider>
       </body>
     </html>
   );

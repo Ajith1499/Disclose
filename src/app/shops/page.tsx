@@ -1,9 +1,20 @@
+'use client';
 import ShopCard from "@/components/shop-card";
 import { Input } from "@/components/ui/input";
-import { shops } from "@/lib/data";
+import { useCollection, useFirebase, useMemoFirebase } from "@/firebase";
+import { collection } from "firebase/firestore";
 import { Search } from "lucide-react";
 
 export default function ShopsPage() {
+  const { firestore } = useFirebase();
+
+  const shopsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return collection(firestore, 'shops');
+  }, [firestore]);
+
+  const { data: shops } = useCollection(shopsQuery);
+
   return (
     <div className="space-y-8">
       <div>
@@ -17,7 +28,7 @@ export default function ShopsPage() {
         </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {shops.map((shop) => (
+        {shops?.map((shop) => (
           <ShopCard key={shop.id} shop={shop} />
         ))}
       </div>

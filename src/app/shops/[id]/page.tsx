@@ -1,29 +1,56 @@
+'use client';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Phone, MessageSquare, MapPin } from 'lucide-react';
 import {
-  findShopById,
   findImageById,
-  getProductsByShop,
-  getProductsByShopAndCategory,
 } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ProductCard from '@/components/product-card';
+import { useCollection, useDoc, useFirebase, useMemoFirebase } from '@/firebase';
+import { collection, doc, query, where } from 'firebase/firestore';
 
 export default function ShopDetailPage({ params }: { params: { id: string } }) {
-  const shop = findShopById(params.id);
+  const { firestore } = useFirebase();
+
+  const shopRef = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return doc(firestore, 'shops', params.id);
+  }, [firestore, params.id]);
+  const { data: shop } = useDoc(shopRef);
+
+  const productsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'products'), where('shopId', '==', params.id));
+  }, [firestore, params.id]);
+  const { data: allProducts } = useCollection(productsQuery);
+
+  const womenProductsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'products'), where('shopId', '==', params.id), where('category', '==', 'Women'));
+  }, [firestore, params.id]);
+  const { data: womenProducts } = useCollection(womenProductsQuery);
+
+  const menProductsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'products'), where('shopId', '==', params.id), where('category', '==', 'Men'));
+  }, [firestore, params.id]);
+  const { data: menProducts } = useCollection(menProductsQuery);
+
+  const kidsProductsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'products'), where('shopId', '==', params.id), where('category', '==', 'Kids'));
+  }, [firestore, params.id]);
+  const { data: kidsProducts } = useCollection(kidsProductsQuery);
 
   if (!shop) {
-    notFound();
+    // This will be handled by loading state, or could show a not found component
+    return null;
   }
 
   const shopImage = findImageById(shop.imageId);
-  const allProducts = getProductsByShop(shop.id);
-  const menProducts = getProductsByShopAndCategory(shop.id, 'Men');
-  const womenProducts = getProductsByShopAndCategory(shop.id, 'Women');
-  const kidsProducts = getProductsByShopAndCategory(shop.id, 'Kids');
 
   return (
     <div className="space-y-8">
@@ -76,27 +103,27 @@ export default function ShopDetailPage({ params }: { params: { id: string } }) {
           <div className="mt-6">
             <TabsContent value="all">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {allProducts.map(p => <ProductCard key={p.id} product={p} />)}
+                {allProducts?.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
-               {allProducts.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
+               {allProducts?.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
             </TabsContent>
             <TabsContent value="women">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {womenProducts.map(p => <ProductCard key={p.id} product={p} />)}
+                {womenProducts?.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
-              {womenProducts.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
+              {womenProducts?.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
             </TabsContent>
             <TabsContent value="men">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {menProducts.map(p => <ProductCard key={p.id} product={p} />)}
+                {menProducts?.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
-              {menProducts.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
+              {menProducts?.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
             </TabsContent>
              <TabsContent value="kids">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {kidsProducts.map(p => <ProductCard key={p.id} product={p} />)}
+                {kidsProducts?.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
-              {kidsProducts.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
+              {kidsProducts?.length === 0 && <p className='text-muted-foreground text-center py-8'>No products found in this collection.</p>}
             </TabsContent>
           </div>
         </Tabs>
