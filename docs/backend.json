@@ -1,0 +1,350 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the LocalThreads application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user entity."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user.",
+          "format": "email"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The user's phone number."
+        },
+        "gender": {
+          "type": "string",
+          "description": "The gender of the user."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the user."
+        },
+        "ageRange": {
+          "type": "string",
+          "description": "The age range of the user."
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "email"
+      ]
+    },
+    "Shop": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Shop",
+      "type": "object",
+      "description": "Represents a shop selling clothes in the LocalThreads application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the shop entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the shop."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the shop."
+        },
+        "contactNumber": {
+          "type": "string",
+          "description": "The contact number of the shop."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the shop."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "location"
+      ]
+    },
+    "Product": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Product",
+      "type": "object",
+      "description": "Represents a clothing product sold in the LocalThreads application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the product entity."
+        },
+        "shopId": {
+          "type": "string",
+          "description": "Reference to Shop. (Relationship: Shop 1:N Product)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the product."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the product."
+        },
+        "price": {
+          "type": "number",
+          "description": "The price of the product."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "The URL of the product image.",
+          "format": "uri"
+        },
+        "gender": {
+          "type": "string",
+          "description": "The target gender for the product."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the product",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "shopId",
+        "name",
+        "price",
+        "imageUrl"
+      ]
+    },
+    "Wishlist": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Wishlist",
+      "type": "object",
+      "description": "Represents a user's wishlist in the LocalThreads application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the wishlist entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N Wishlist)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the wishlist."
+        },
+        "productIds": {
+          "type": "array",
+          "description": "References to Products. (Relationship: Wishlist N:N Product)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "name"
+      ]
+    },
+    "Wallet": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Wallet",
+      "type": "object",
+      "description": "Represents a user's wallet in the LocalThreads application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the wallet entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:1 Wallet)"
+        },
+        "balance": {
+          "type": "number",
+          "description": "The current balance of the wallet."
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "balance"
+      ]
+    },
+    "Transaction": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Transaction",
+      "type": "object",
+      "description": "Represents a transaction in the LocalThreads application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the transaction entity."
+        },
+        "walletId": {
+          "type": "string",
+          "description": "Reference to Wallet. (Relationship: Wallet 1:N Transaction)"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of transaction (e.g., cashback, return, exchange)."
+        },
+        "amount": {
+          "type": "number",
+          "description": "The amount of the transaction."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the transaction.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "walletId",
+        "type",
+        "amount",
+        "date"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profiles. Access restricted to the user. All user-specific data is nested under this path.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/shops/{shopId}",
+        "definition": {
+          "entityName": "Shop",
+          "schema": {
+            "$ref": "#/backend/entities/Shop"
+          },
+          "description": "Stores shop profiles. No specific access control beyond CRUD.",
+          "params": [
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/shops/{shopId}/products/{productId}",
+        "definition": {
+          "entityName": "Product",
+          "schema": {
+            "$ref": "#/backend/entities/Product"
+          },
+          "description": "Stores product information for a specific shop. Includes denormalized 'shopId' for query purposes.",
+          "params": [
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            },
+            {
+              "name": "productId",
+              "description": "The unique identifier for the product."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/wishlists/{wishlistId}",
+        "definition": {
+          "entityName": "Wishlist",
+          "schema": {
+            "$ref": "#/backend/entities/Wishlist"
+          },
+          "description": "Stores user-specific wishlists. Access restricted to the user.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "wishlistId",
+              "description": "The unique identifier for the wishlist."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/wallets/{walletId}",
+        "definition": {
+          "entityName": "Wallet",
+          "schema": {
+            "$ref": "#/backend/entities/Wallet"
+          },
+          "description": "Stores user wallets. Access restricted to the user.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "walletId",
+              "description": "The unique identifier for the wallet."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/wallets/{walletId}/transactions/{transactionId}",
+        "definition": {
+          "entityName": "Transaction",
+          "schema": {
+            "$ref": "#/backend/entities/Transaction"
+          },
+          "description": "Stores transaction history for each wallet. Access restricted to the user.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "walletId",
+              "description": "The unique identifier for the wallet."
+            },
+            {
+              "name": "transactionId",
+              "description": "The unique identifier for the transaction."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to align with the application's features and prioritize security, scalability, and ease of debugging, emphasizing authorization independence through denormalization.  The design leverages path-based ownership for private user data and membership maps for collaborative data.\n\n*   `/users/{userId}`: Stores user profiles. Access is restricted to the user themselves.  All user-specific data is nested under this path.\n*   `/shops/{shopId}`: Stores shop profiles.  No specific access control beyond CRUD. Shops are treated as public entities.\n*   `/shops/{shopId}/products/{productId}`: Stores product information related to a specific shop. Access to product information is generally public, but creation/modification is limited to shop owners. Includes denormalized `shopId` for query purposes.\n*   `/users/{userId}/wishlists/{wishlistId}`: Stores user-specific wishlists. Access is restricted to the owning user.\n*   `/users/{userId}/wallets/{walletId}`: Stores user wallets.  Access restricted to the owning user.\n*   `/users/{userId}/wallets/{walletId}/transactions/{transactionId}`: Stores transaction history for each wallet. Access restricted to the owning user.\n\n**Authorization Independence:**\n*   The design avoids `get()` calls in security rules by denormalizing authorization data.  For example, while not explicitly present, if `Product` write access depended on `Shop` attributes, those attributes would be copied into the `Product` documents. The current structure, however, allows Products to be created/modified with only the `shopId` being validated.\n\n**QAPs (Rules are not Filters):**\n*   The structure supports secure list operations (QAPs) by segregating data based on ownership.  Listing wishlists is always done under `/users/{userId}/wishlists`, ensuring only the user's own wishlists are retrieved.  Similarly for wallets and transactions.\n\n**Explicit State Modeling and Predictable Schema:**\nThe database design deliberately avoids boolean flags to represent states; a `status` field is preferred instead. All the database entities follow predictable schemas as defined in the `jsonSchema` provided in the request."
+  }
+}
